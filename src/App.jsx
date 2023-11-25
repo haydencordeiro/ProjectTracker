@@ -1,12 +1,13 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
+import BoardPage from './pages/BoardPage'
 function App() {
 
   return (
-    <>
-    <h1 className='text-lg text-red-500'>Test</h1>
-    </>
+    <div className='h-screen w-screen'>
+    <BoardPage></BoardPage>
+    </div>
   )
 }
 
