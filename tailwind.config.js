@@ -11,7 +11,9 @@ export default {
       'navbarTextColor' : '#9FADBC',
       'menuButtonColor': '#579DFF',
       'secondaryNavColor': '#ffffff3d',
-      'green' : '#00875A'
+      'green' : '#00875A',
+      'searchFieldBG': '#22272B',
+      'whiteText' : 'FCFDFD',
 
     },
     extend: {},
