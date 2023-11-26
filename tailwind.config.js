@@ -4,6 +4,16 @@ export default {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
+    colors: {
+      transparent: 'transparent',
+      current: 'currentColor',
+      'navbarBackground': '#1D2125',
+      'navbarTextColor' : '#9FADBC',
+      'menuButtonColor': '#579DFF',
+      'secondaryNavColor': '#ffffff3d',
+      'green' : '#00875A'
+
+    },
     extend: {},
   },
   plugins: [],
