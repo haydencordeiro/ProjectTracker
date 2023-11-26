@@ -3,21 +3,20 @@ import { FaPlus } from "react-icons/fa";
 import TaskCard from './TaskCard';
 import { HiDotsHorizontal } from "react-icons/hi";
 
-const TaskList = () => {
+const TaskList = ({tasks, taskListName}) => {
   return (
-    <div className='rounded-lg bg-taskListBg flex-none w-64 m-2'>
+    <div className='rounded-lg bg-taskListBg flex-- w-64 m-2'>
       <div className='flex justify-between m-2'>
 
         <h1 className='mt-1 text-whiteText'>
-          ToDo
+          {taskListName}
         </h1>
         <div >
         <HiDotsHorizontal className='text-whiteText'/>
         </div>
       </div>
-      <TaskCard></TaskCard>
-      <TaskCard></TaskCard>
-      <TaskCard></TaskCard>
+      {tasks.filter((task) => task.list === taskListName).map((task) =><TaskCard task={task}></TaskCard> )}
+
 
 
       
