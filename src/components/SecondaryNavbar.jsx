@@ -1,4 +1,5 @@
 import React from 'react'
+import { FaRegStar  } from "react-icons/fa";
 
 const SecondaryNavbar = () => {
   return (
@@ -7,7 +8,7 @@ const SecondaryNavbar = () => {
 
       <ul className='flex gap-2'>
         <li>Mac</li>
-        <li>S</li>
+        <li className='flex items-center'><FaRegStar style={{color: 'black'}}  className='mr-2' /> </li>
       </ul>
       </div>
       <div>Share</div>

@@ -11,10 +11,10 @@ const BoardPage = () => {
                 <NavBar />
             </div>
             <div className='flex flex-1 '>
-                <div className='w-60 bg-orange-300'>
+                <div className='w-1/5 bg-orange-300'>
                     <LeftSideNavBar />
                 </div>
-                <div className='bg-violet-400 flex-auto'>
+                <div className='bg-violet-400 flex-none w-4/5'>
                     <SecondaryNavbar />
                     <BoardMainComponent />
                 </div>

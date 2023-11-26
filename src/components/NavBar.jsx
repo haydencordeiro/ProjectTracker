@@ -1,4 +1,6 @@
 import React from 'react'
+import { FaWindowRestore  } from "react-icons/fa";
+import { FaArrowDown  } from "react-icons/fa";
 
 const NavBar = () => {
   return (
@@ -6,10 +8,10 @@ const NavBar = () => {
         <div >
 
             <ul className='flex gap-8'>
-                <li>Trello</li>
-                <li>Recent</li>
-                <li>Starred</li>
-                <li>Create</li>
+                <li className='flex justify-evenly items-center'>  <FaWindowRestore style={{color: 'black'}}  className='mr-2' />  Trello</li>
+                <li className='flex items-center p-2 rounded-sm hover:bg-blue-200'>Recent  <FaArrowDown style={{color: 'black'}}  className='ml-2' /> </li>
+                <li className='flex items-center p-2 rounded-sm hover:bg-blue-200'>Starred <FaArrowDown style={{color: 'black'}}  className='ml-2' /> </li>
+                <li className='flex items-center p-2 rounded-md bg-blue-500 hover:bg-blue-400 ring-2 ring-blue-500'>Create</li>
 
             </ul>
         </div>
