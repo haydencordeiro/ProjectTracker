@@ -11,7 +11,7 @@ const TaskList = forwardRef(({ tasks, taskListName, handleSort, taskIndex }, ref
   }, [tasks, taskListName]);
 
   return (
-    <div className='rounded-lg bg-taskListBg flex-- w-64 m-2 flex-shrink'
+    <div className='rounded-lg bg-taskListBg flex-- w-64 m-2 flex-shrink max-h-[559px] overflow-auto'
     
     draggable={true}
     onDragStart={() => {
