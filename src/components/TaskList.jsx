@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState, forwardRef } from 'react';
 import { FaPlus } from 'react-icons/fa';
 import { HiDotsHorizontal } from 'react-icons/hi';
 import { BsClock } from 'react-icons/bs';
+import { MdClose } from "react-icons/md";
 
 const TaskList = forwardRef(({ tasks, taskListName, handleSort, AddCard }, ref) => {
   const [allTaskList, setAllTaskList] = useState([]);
@@ -12,10 +13,10 @@ const TaskList = forwardRef(({ tasks, taskListName, handleSort, AddCard }, ref) 
     setAllTaskList(tasks.filter((task) => task.list === taskListName));
   }, [tasks, taskListName]);
 
-  function dueDateCalc(dueDate){
+  function dueDateCalc(dueDate) {
     const [day, month] = dueDate.split(' ');
     const dueDateObject = new Date(new Date().getFullYear(), getMonthIndex(month), parseInt(day), 23, 59, 59);
-  
+
     function getMonthIndex(month) {
       const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
       return months.indexOf(month);
@@ -23,13 +24,13 @@ const TaskList = forwardRef(({ tasks, taskListName, handleSort, AddCard }, ref) 
 
     const currentDate = new Date();
     currentDate.setHours(0, 0, 0, 0); // Set hours, minutes, seconds, and milliseconds to 0 for accurate comparison
-  
+
     const timeDifference = dueDateObject.getTime() - currentDate.getTime();
     const daysDifference = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
-    if (daysDifference > 5 ){
+    if (daysDifference > 5) {
       return 'text-taskCardText'
     }
-    if(daysDifference < 0){
+    if (daysDifference < 0) {
       return 'bg-overdueRed text-overdueRedText '
     }
     return 'bg-warningYellow  text-approachingDueDateText'
@@ -40,20 +41,20 @@ const TaskList = forwardRef(({ tasks, taskListName, handleSort, AddCard }, ref) 
 
   return (
     <div className='rounded-lg bg-taskListBg flex-- w-64 m-2 flex-shrink max-h-[559px] overflow-auto'
-    
-    draggable={true}
-    onDragStart={() => {
-      ref.current.dragListName = taskListName;
-    }}
-    onDragEnter={() => {
-      ref.current.draggedOverListName = taskListName;
-    }}
-    onDragEnd={() => {
-      handleSort();
-    }}
-    onDragOver={(e) => {
-      e.preventDefault();
-    }}>
+
+      draggable={true}
+      onDragStart={() => {
+        ref.current.dragListName = taskListName;
+      }}
+      onDragEnter={() => {
+        ref.current.draggedOverListName = taskListName;
+      }}
+      onDragEnd={() => {
+        handleSort();
+      }}
+      onDragOver={(e) => {
+        e.preventDefault();
+      }}>
       <div className='flex justify-between m-2'>
         <h1 className='mt-1 text-whiteText'>{taskListName}</h1>
         <div>
@@ -83,43 +84,53 @@ const TaskList = forwardRef(({ tasks, taskListName, handleSort, AddCard }, ref) 
         >
           <h1 className='ml-1 text-sm text-taskCardText mb-1'>{task.task}</h1>
           {
-            task.dueDate ? <div className={`text-xs p-1 w-16 justify-center items-center rounded-sm mb-1 ml-1 flex ${ dueDateCalc(task.dueDate)}`}>
-            <BsClock className='mr-1' />
-            {task.dueDate}
-          </div> : <div></div>
+            task.dueDate ? <div className={`text-xs p-1 w-16 justify-center items-center rounded-sm mb-1 ml-1 flex ${dueDateCalc(task.dueDate)}`}>
+              <BsClock className='mr-1' />
+              {task.dueDate}
+            </div> : <div></div>
           }
-  
+
         </div>
       ))}
 
 
-{/* Start */}
+      {/* Start */}
 
-        <div
-          className='flex flex-col bg-taskCardBg rounded-lg m-1'
-        >
-          <input 
+      <div
+        className='flex flex-col bg-taskCardBg rounded-lg m-1'
+      >
+        <input
           className={`${addingNewTask ? 'block p-2 pb-8' : 'hidden'} bg-taskCardBg outline-none text-taskCardText`}
-           placeholder='Enter a title for this card...'
-           value={inputText}
-           onChange={event => setInputText(event.target.value)} 
-           onKeyDown={event => {
+          placeholder='Enter a title for this card...'
+          value={inputText}
+          addingnewtask={addingNewTask.toString()}
+          onChange={event => setInputText(event.target.value)}
+          onKeyDown={event => {
             if (event.key === 'Enter') {
-              AddCard({ 'list': taskListName, 'task' : inputText})
+              AddCard({ 'list': taskListName, 'task': inputText });
               setAddingNewTask(false);
             }
           }}
-           />
-        </div>
-
-{/* End */}
-
-      <div className='bg-cyan-500 flex items-center hover:bg-red-500 mx-1 rounded-md text-whiteText hover:bg-backgroundNeutralHovered'  onClick={() =>  {setInputText('');setAddingNewTask(true)}} >
-        <FaPlus className='rounded-sm mx-2 text-taskCardText text-sm' />
-        <h2 className='text-sm text-taskCardText p-2'>Add a card</h2>
+        />
       </div>
+
+      {/* End */}
+
+      {addingNewTask ?
+        <div className='bg-cyan-500 flex items-center hover:bg-red-500 mx-1 rounded-md text-whiteText' >
+          <h2 className='text-sm text-navbarBackground font-semibold rounded-sm py-1 px-2 bg-menuButtonColor'
+            onClick={() => { AddCard({ 'list': taskListName, 'task': inputText }); setAddingNewTask(false); }}>
+            Add card</h2>
+          <MdClose className='rounded-sm mx-2 text-taskCardText text-lg z-10' onClick={() => { setInputText(''); setAddingNewTask(false) }} />
+        </div> :
+        <div className='bg-cyan-500 flex items-center hover:bg-red-500 mx-1 rounded-md text-whiteText hover:bg-backgroundNeutralHovered'
+        onClick={() => { setInputText(''); setAddingNewTask(true) }} >
+          <FaPlus className='rounded-sm mx-2 text-taskCardText text-sm' />
+          <h2 className='text-sm text-taskCardText p-2'>Add a card</h2>
+        </div>
+      }
       <div className='h-2'></div>
-    </div>
+    </div >
   );
 });
 
