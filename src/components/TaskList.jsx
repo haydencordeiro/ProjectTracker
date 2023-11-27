@@ -7,6 +7,7 @@ const TaskList = forwardRef(({ tasks, taskListName }, ref) => {
   const [allTaskList, setAllTaskList] = useState([]);
 
   function handleSort() {
+    console.log(ref.current)
     const allTaskListClone = [...allTaskList];
     const temp = allTaskListClone[ref.current.dragPerson];
     allTaskListClone[ref.current.dragPerson] = allTaskListClone[ref.current.draggedOverPerson];
@@ -34,9 +35,11 @@ const TaskList = forwardRef(({ tasks, taskListName }, ref) => {
           draggable={true}
           onDragStart={() => {
             ref.current.dragPerson = index;
+            ref.current.dragListName = taskListName;
           }}
           onDragEnter={() => {
             ref.current.draggedOverPerson = index;
+            ref.current.draggedOverListName = taskListName;
           }}
           onDragEnd={() => {
             handleSort();

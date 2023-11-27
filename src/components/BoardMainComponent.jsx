@@ -59,9 +59,12 @@ const BoardMainComponent = () => {
   ]
   )
 
+  
   const dragRef = useRef({
     dragPerson: 0,
     draggedOverPerson: 0,
+    dragListName:"",
+    draggedOverListName:"",
   });
 
   const [taskList, setTaskList] = useState(['ToDo', 'InProgress', 'Pending', 'Completed'])
