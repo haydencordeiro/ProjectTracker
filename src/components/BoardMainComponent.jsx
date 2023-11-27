@@ -80,20 +80,14 @@ const BoardMainComponent = () => {
   });
 
   function handleSort() {
-    console.log(dragRef.current)
+    // console.log(dragRef.current)
     const allTaskListClone = [...allTaskList];
-    // // swapping order in list
-    // const temp = allTaskListClone[dragRef.current.dragPerson];
-    // allTaskListClone[dragRef.current.dragPerson] = allTaskListClone[dragRef.current.draggedOverPerson];
-    // allTaskListClone[dragRef.current.draggedOverPerson] = temp;
-    // // setting new listName
-    // console.log(allTaskListClone[dragRef.current.dragPerson]['list'],dragRef.current.draggedOverListName)
     const firstObjectIndex = allTaskListClone.findIndex(obj => obj.id === dragRef.current.dragPerson);
     const secondObjectIndex = allTaskListClone.findIndex(obj => obj.id === dragRef.current.draggedOverPerson);
     let temp = allTaskListClone[firstObjectIndex];
-    console.log(temp)
+    // console.log(temp)
     temp.list = dragRef.current.draggedOverListName
-    console.log(temp)
+    // console.log(temp)
     allTaskListClone[firstObjectIndex] = allTaskListClone[secondObjectIndex]
     allTaskListClone[secondObjectIndex] = temp;
     setAllTaskList(allTaskListClone);
