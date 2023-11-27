@@ -59,6 +59,10 @@ const BoardMainComponent = () => {
   ]
   )
 
+  const dragRef = useRef({
+    dragPerson: 0,
+    draggedOverPerson: 0,
+  });
 
   const [taskList, setTaskList] = useState(['ToDo', 'InProgress', 'Pending', 'Completed'])
   return (
@@ -67,7 +71,8 @@ const BoardMainComponent = () => {
 
       <div className='flex overflow-auto '>
         {taskList.map((task, index) =>
-          <TaskList taskListName={task} tasks={allTaskList} key={index}></TaskList>
+          <TaskList taskListName={task} tasks={allTaskList} key={index}  ref={dragRef}
+          ></TaskList>
         )}
 
 
