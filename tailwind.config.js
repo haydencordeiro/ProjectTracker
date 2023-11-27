@@ -25,6 +25,8 @@ export default {
       'warningYellow' : '#e2b203',
       'approachingDueDateText': '#1D2125',
       'backgroundNeutralHovered' : '#A6C5E229',
+      'addNewListBg' : '#ffffff3d',
+      'addNewListText' : '#172B4D',
 
     },
     extend: {},

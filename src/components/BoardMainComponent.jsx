@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react'
 import TaskList from './TaskList'
 import SecondaryNavbar from './SecondaryNavbar'
-
+import AddTaskList from './AddTaskList'
 
 
 const BoardMainComponent = () => {
@@ -105,17 +105,18 @@ const BoardMainComponent = () => {
     setAllTaskList(temp)
     
   }
-  const [taskList, setTaskList] = useState(['ToDo', 'InProgress', 'Pending', 'Completed'])
+  const [taskList, setTaskList] = useState(['ToDo', 'InProgress', 'Pending'])
   return (
     <div className="h-screen bg-green bg-fit bg-center bg-[url('https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2048x1194/1ae72d8a416e9a846331da7083f0d4ba/photo-1694250990115-ca7d9d991b24.jpg')]">
       <SecondaryNavbar />
 
-      <div className='flex overflow-auto '>
+      <div className='flex overflow-auto h-[559px]'>
         {taskList.map((task, index) =>
           <TaskList taskListName={task} tasks={allTaskList} key={index} ref={dragRef} handleSort={handleSort}
           AddCard={AddCard}
           ></TaskList>
         )}
+        <AddTaskList></AddTaskList>
 
 
       </div>

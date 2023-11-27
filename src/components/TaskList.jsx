@@ -40,7 +40,7 @@ const TaskList = forwardRef(({ tasks, taskListName, handleSort, AddCard }, ref) 
 
 
   return (
-    <div className='rounded-lg bg-taskListBg flex-- w-64 m-2 flex-shrink max-h-[559px] overflow-auto'
+    <div className='rounded-lg bg-taskListBg flex-column w-64 m-2 overflow-auto'
 
       draggable={true}
       onDragStart={() => {

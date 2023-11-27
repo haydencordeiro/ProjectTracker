@@ -5,7 +5,7 @@ import BoardPage from './pages/BoardPage'
 function App() {
 
   return (
-    <div className='h-screen w-screen overflow-auto'>
+    <div className='h-screen w-screen overflow-y-clip overflow-x-auto'>
     <BoardPage></BoardPage>
     </div>
   )
