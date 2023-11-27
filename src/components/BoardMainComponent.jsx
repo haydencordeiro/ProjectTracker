@@ -57,7 +57,7 @@ const BoardMainComponent = () => {
       },
       {
           "task": "Exercise Routine",
-          "dueDate": "Daily",
+          "dueDate": "22 Nov",
           "list": "Pending",
           "id": "aeb2a394-b13a-4e6c-8e54-68e98296d4ef"
       },

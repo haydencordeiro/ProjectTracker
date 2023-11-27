@@ -10,6 +10,29 @@ const TaskList = forwardRef(({ tasks, taskListName, handleSort, taskIndex }, ref
     setAllTaskList(tasks.filter((task) => task.list === taskListName));
   }, [tasks, taskListName]);
 
+  function dueDateCalc(dueDate){
+    const [day, month] = dueDate.split(' ');
+    const dueDateObject = new Date(new Date().getFullYear(), getMonthIndex(month), parseInt(day), 23, 59, 59);
+  
+    function getMonthIndex(month) {
+      const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+      return months.indexOf(month);
+    }
+
+    const currentDate = new Date();
+    currentDate.setHours(0, 0, 0, 0); // Set hours, minutes, seconds, and milliseconds to 0 for accurate comparison
+  
+    const timeDifference = dueDateObject.getTime() - currentDate.getTime();
+    const daysDifference = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
+    if (daysDifference > 5 ){
+      return 'text-taskCardText'
+    }
+    if(daysDifference < 0){
+      return 'bg-overdueRed text-overdueRedText '
+    }
+    return 'bg-warningYellow  text-approachingDueDateText'
+  }
+
   return (
     <div className='rounded-lg bg-taskListBg flex-- w-64 m-2 flex-shrink max-h-[559px] overflow-auto'
     
@@ -54,7 +77,7 @@ const TaskList = forwardRef(({ tasks, taskListName, handleSort, taskIndex }, ref
           }}
         >
           <h1 className='ml-1 text-sm text-taskCardText mb-1'>{task.task}</h1>
-          <div className='text-xs p-1 bg-overdueRed w-16 justify-center items-center rounded-sm mb-1 ml-1 text-overdueRedText flex'>
+          <div className={`text-xs p-1 w-16 justify-center items-center rounded-sm mb-1 ml-1 flex ${ dueDateCalc(task.dueDate)}`}>
             <BsClock className='mr-1' />
             {task.dueDate}
           </div>

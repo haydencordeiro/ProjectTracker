@@ -22,6 +22,8 @@ export default {
       'taskCardText': '#B6C2CF',
       'overdueRed' : '#5D1F1A',
       'overdueRedText' : '#FD9891',
+      'warningYellow' : '#e2b203',
+      'approachingDueDateText': '#1D2125',
 
     },
     extend: {},
