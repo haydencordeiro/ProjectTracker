@@ -25,7 +25,7 @@ const NavBar = () => {
 
                 <div className='justify-center items-center flex border border-#a6c5e229 rounded-md'>
                     <span><GrFormSearch className='text-#8C9BAB text-xl ml-2' /></span>
-            <input type="text" id="first_name" class=" font-medium	h-8 bg-searchFieldBG text-#8C9BAB text-md rounded-md block w-full p-2.5 pl-1" placeholder="Search" />
+            <input type="text" id="first_name" className=" font-medium	h-8 bg-searchFieldBG text-#8C9BAB text-md rounded-md block w-full p-2.5 pl-1" placeholder="Search" />
         </div>
                 </li>
                 <li className='text-navbarTextColor justify-center items-center'><TbBellRinging2 className='text-navbarTextColor text-xl mt-1' /></li>
