@@ -24,6 +24,7 @@ export default {
       'overdueRedText' : '#FD9891',
       'warningYellow' : '#e2b203',
       'approachingDueDateText': '#1D2125',
+      'backgroundNeutralHovered' : '#A6C5E229',
 
     },
     extend: {},

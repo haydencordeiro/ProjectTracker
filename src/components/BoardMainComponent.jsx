@@ -79,6 +79,8 @@ const BoardMainComponent = () => {
     draggedOverListName:"",
   });
 
+  
+
   function handleSort() {
     // console.log(dragRef.current)
     const allTaskListClone = [...allTaskList];
@@ -93,6 +95,16 @@ const BoardMainComponent = () => {
     setAllTaskList(allTaskListClone);
   }
   
+
+  function AddCard(taskData){
+    const temp = [...allTaskList]
+    taskData['id'] = "9a2ff95a-98f2-4da0-918d-6f1f43e3b61dd" + taskData.task
+    temp.push(
+      taskData
+    )
+    setAllTaskList(temp)
+    
+  }
   const [taskList, setTaskList] = useState(['ToDo', 'InProgress', 'Pending', 'Completed'])
   return (
     <div className="h-screen bg-green bg-fit bg-center bg-[url('https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2048x1194/1ae72d8a416e9a846331da7083f0d4ba/photo-1694250990115-ca7d9d991b24.jpg')]">
@@ -101,6 +113,7 @@ const BoardMainComponent = () => {
       <div className='flex overflow-auto '>
         {taskList.map((task, index) =>
           <TaskList taskListName={task} tasks={allTaskList} key={index} ref={dragRef} handleSort={handleSort}
+          AddCard={AddCard}
           ></TaskList>
         )}
 
