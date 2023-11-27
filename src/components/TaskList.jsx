@@ -3,24 +3,29 @@ import { FaPlus } from 'react-icons/fa';
 import { HiDotsHorizontal } from 'react-icons/hi';
 import { BsClock } from 'react-icons/bs';
 
-const TaskList = forwardRef(({ tasks, taskListName }, ref) => {
+const TaskList = forwardRef(({ tasks, taskListName, handleSort, taskIndex }, ref) => {
   const [allTaskList, setAllTaskList] = useState([]);
-
-  function handleSort() {
-    console.log(ref.current)
-    const allTaskListClone = [...allTaskList];
-    const temp = allTaskListClone[ref.current.dragPerson];
-    allTaskListClone[ref.current.dragPerson] = allTaskListClone[ref.current.draggedOverPerson];
-    allTaskListClone[ref.current.draggedOverPerson] = temp;
-    setAllTaskList(allTaskListClone);
-  }
 
   useEffect(() => {
     setAllTaskList(tasks.filter((task) => task.list === taskListName));
   }, [tasks, taskListName]);
 
   return (
-    <div className='rounded-lg bg-taskListBg flex-- w-64 m-2 flex-shrink'>
+    <div className='rounded-lg bg-taskListBg flex-- w-64 m-2 flex-shrink'
+    
+    draggable={true}
+    onDragStart={() => {
+      ref.current.dragListName = taskListName;
+    }}
+    onDragEnter={() => {
+      ref.current.draggedOverListName = taskListName;
+    }}
+    onDragEnd={() => {
+      handleSort();
+    }}
+    onDragOver={(e) => {
+      e.preventDefault();
+    }}>
       <div className='flex justify-between m-2'>
         <h1 className='mt-1 text-whiteText'>{taskListName}</h1>
         <div>
@@ -31,14 +36,14 @@ const TaskList = forwardRef(({ tasks, taskListName }, ref) => {
         <div
           className='flex flex-col bg-taskCardBg rounded-lg m-1 p-2'
           task={task}
-          key={index}
+          key={task.id}
           draggable={true}
           onDragStart={() => {
-            ref.current.dragPerson = index;
+            ref.current.dragPerson = task.id;
             ref.current.dragListName = taskListName;
           }}
           onDragEnter={() => {
-            ref.current.draggedOverPerson = index;
+            ref.current.draggedOverPerson = task.id;
             ref.current.draggedOverListName = taskListName;
           }}
           onDragEnd={() => {
