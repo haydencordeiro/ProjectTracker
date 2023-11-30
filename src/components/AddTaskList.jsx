@@ -15,7 +15,7 @@ const AddTaskList = ({AddNewTaskList}) => {
 
   const AddingTaskList = () => {
     return (
-      <div className='flex flex-col h-20 bg-navbarBackground w-64 rounded-md mt-2'>
+      <div className='flex flex-col h-20 bg-navbarBackground min-w-64 mr-4 flex-shrink-0 rounded-md mt-2'>
         <div
           className='flex flex-col bg-taskCardBg rounded-lg m-1 h-10'
         >
@@ -53,7 +53,7 @@ const AddTaskList = ({AddNewTaskList}) => {
 
 
 
-      <div className={`flex flex-row h-10 w-64 mt-2 rounded-md bg-addNewListBg items-center hover:bg-transparent`}
+      <div className={`flex flex-row h-10 min-w-64 mt-2 mr-4 rounded-md flex-shrink-0 bg-addNewListBg items-center hover:bg-transparent`}
         onClick={() => { setAddingNewTaskList(true) }} >
         <FaPlus className='rounded-sm mx-2 ml-4 text-addNewListText text-sm' />
         <h2 className='text-sm text-addNewListText p-2'>Add a card</h2>
