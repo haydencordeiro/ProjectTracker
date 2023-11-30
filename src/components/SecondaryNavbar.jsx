@@ -8,7 +8,7 @@ const SecondaryNavbar = () => {
       <div>
 
       <ul className='flex gap-2 justify-center items-center '>
-        <li className='font-bold text-xl ml-2'>MAC</li>
+        <li className='font-bold text-xl ml-8'>MAC</li>
         <li className='flex items-center'><FaStar style={{color: 'black'}}  className='mr-2' /> </li>
       </ul>
       </div>

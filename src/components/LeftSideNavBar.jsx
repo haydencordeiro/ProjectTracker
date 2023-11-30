@@ -1,8 +1,10 @@
 import React from 'react'
 
-const LeftSideNavBar = () => {
+const LeftSideNavBar = ({toggleSideNav}) => {
   return (
-    <div>LeftSideNavBar</div>
+    <div>
+      <div onClick={()=>{toggleSideNav()}}>Close</div>
+    </div>
   )
 }
 
