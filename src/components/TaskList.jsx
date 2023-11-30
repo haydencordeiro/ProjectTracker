@@ -40,22 +40,22 @@ const TaskList = forwardRef(({ tasks, taskListName, handleSort, AddCard }, ref) 
 
 
   return (
-    <div className='rounded-lg bg-taskListBg flex-column w-64 m-2 overflow-auto'
-
-      draggable={true}
-      onDragStart={() => {
-        ref.current.dragListName = taskListName;
-      }}
-      onDragEnter={() => {
-        ref.current.draggedOverListName = taskListName;
-      }}
-      onDragEnd={() => {
-        handleSort();
-      }}
-      onDragOver={(e) => {
-        e.preventDefault();
-      }}>
-      <div className='flex justify-between m-2'>
+    <div className='rounded-lg bg-taskListBg flex-column w-64 m-2 overflow-auto'>
+      <div className='flex justify-between p-2'
+            draggable={true}
+            onDragStart={() => {
+              ref.current.dragTitleListName = taskListName;
+            }}
+            onDragEnter={() => {
+              ref.current.draggedOverTitleListName = taskListName;
+            }}
+            onDragEnd={() => {
+              handleSort(true);
+            }}
+            onDragOver={(e) => {
+              e.preventDefault();
+            }}
+      >
         <h1 className='mt-1 text-whiteText'>{taskListName}</h1>
         <div>
           <HiDotsHorizontal className='text-whiteText' />
@@ -63,16 +63,17 @@ const TaskList = forwardRef(({ tasks, taskListName, handleSort, AddCard }, ref) 
       </div>
       {allTaskList.map((task, index) => (
         <div
+        
           className='flex flex-col bg-taskCardBg rounded-lg m-1 p-2'
           task={task}
           key={task.id}
           draggable={true}
           onDragStart={() => {
-            ref.current.dragPerson = task.id;
+            ref.current.dragTask = task.id;
             ref.current.dragListName = taskListName;
           }}
           onDragEnter={() => {
-            ref.current.draggedOverPerson = task.id;
+            ref.current.draggeOverTask = task.id;
             ref.current.draggedOverListName = taskListName;
           }}
           onDragEnd={() => {

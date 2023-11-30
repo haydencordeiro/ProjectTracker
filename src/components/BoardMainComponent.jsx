@@ -73,26 +73,42 @@ const BoardMainComponent = () => {
 
 
   const dragRef = useRef({
-    dragPerson: 0,
-    draggedOverPerson: 0,
+    dragTask: 0,
+    draggeOverTask: 0,
     dragListName:"",
     draggedOverListName:"",
   });
-
   
+  
+  const [taskList, setTaskList] = useState(['ToDo', 'InProgress', 'Pending'])
 
-  function handleSort() {
-    // console.log(dragRef.current)
-    const allTaskListClone = [...allTaskList];
-    const firstObjectIndex = allTaskListClone.findIndex(obj => obj.id === dragRef.current.dragPerson);
-    const secondObjectIndex = allTaskListClone.findIndex(obj => obj.id === dragRef.current.draggedOverPerson);
+  function handleSort(isEntireList = false) {
+    const allTaskListClone = isEntireList ? [...taskList] :  [...allTaskList];
+    let firstObjectIndex;
+    let secondObjectIndex
+    if(isEntireList){
+      // dragTitleListName -> Todo List Name Picked up
+      // draggedOverTitleListName -> ToDo List Name to Swap with
+      firstObjectIndex= allTaskListClone.findIndex(obj => obj === dragRef.current.dragTitleListName);
+      secondObjectIndex = allTaskListClone.findIndex(obj => obj === dragRef.current.draggedOverTitleListName);
+    }
+    else{
+      firstObjectIndex = allTaskListClone.findIndex(obj => obj.id === dragRef.current.dragTask);
+      secondObjectIndex = allTaskListClone.findIndex(obj => obj.id === dragRef.current.draggeOverTask);
+    }
+
+    // swapping logic
     let temp = allTaskListClone[firstObjectIndex];
-    // console.log(temp)
-    temp.list = dragRef.current.draggedOverListName
-    // console.log(temp)
+    if(!isEntireList){
+      // change the list for dragged task
+      temp.list = dragRef.current.draggedOverListName
+    }
     allTaskListClone[firstObjectIndex] = allTaskListClone[secondObjectIndex]
     allTaskListClone[secondObjectIndex] = temp;
-    setAllTaskList(allTaskListClone);
+    console.log(allTaskListClone);
+
+    // updating the appropriate list
+    isEntireList ? setTaskList(allTaskListClone) : setAllTaskList(allTaskListClone);
   }
   
 
@@ -105,7 +121,6 @@ const BoardMainComponent = () => {
     setAllTaskList(temp)
     
   }
-  const [taskList, setTaskList] = useState(['ToDo', 'InProgress', 'Pending'])
   return (
     <div className="h-screen bg-green bg-fit bg-center bg-[url('https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2048x1194/1ae72d8a416e9a846331da7083f0d4ba/photo-1694250990115-ca7d9d991b24.jpg')]">
       <SecondaryNavbar />
