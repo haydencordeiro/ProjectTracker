@@ -113,6 +113,8 @@ const TaskList = forwardRef(({ tasks, taskListName, handleSort, AddCard }, ref) 
               setAddingNewTask(false);
             }
           }}
+
+
         />
       </div>
 
@@ -126,7 +128,21 @@ const TaskList = forwardRef(({ tasks, taskListName, handleSort, AddCard }, ref) 
           <MdClose className='rounded-sm mx-2 text-taskCardText text-lg z-10' onClick={() => { setInputText(''); setAddingNewTask(false) }} />
         </div> :
         <div className='bg-cyan-500 flex items-center hover:bg-red-500 mx-1 rounded-md text-whiteText hover:bg-backgroundNeutralHovered'
-        onClick={() => { setInputText(''); setAddingNewTask(true) }} >
+        onClick={() => { setInputText(''); setAddingNewTask(true) }}
+        draggable={true}
+        onDragStart={() => {
+          ref.current.dragListName = taskListName;
+        }}
+        onDragEnter={() => {
+          ref.current.draggedOverListName = taskListName;
+        }}
+        onDragEnd={() => {
+          handleSort();
+        }}
+        onDragOver={(e) => {
+          e.preventDefault();
+        }}
+        >
           <FaPlus className='rounded-sm mx-2 text-taskCardText text-sm' />
           <h2 className='text-sm text-taskCardText p-2'>Add a card</h2>
         </div>

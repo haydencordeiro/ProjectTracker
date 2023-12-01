@@ -101,17 +101,18 @@ const BoardMainComponent = () => {
     else {
       firstObjectIndex = allTaskListClone.findIndex(obj => obj.id === dragRef.current.dragTask);
       secondObjectIndex = allTaskListClone.findIndex(obj => obj.id === dragRef.current.draggeOverTask);
+      console.log(allTaskListClone[firstObjectIndex], firstObjectIndex,secondObjectIndex)
     }
 
     // swapping logic
     let temp = allTaskListClone[firstObjectIndex];
     if (!isEntireList) {
       // change the list for dragged task
+      console.log(dragRef.current.draggedOverListName);
       temp.list = dragRef.current.draggedOverListName
     }
     allTaskListClone[firstObjectIndex] = allTaskListClone[secondObjectIndex]
     allTaskListClone[secondObjectIndex] = temp;
-    console.log(allTaskListClone);
 
     // updating the appropriate list
     isEntireList ? setTaskList(allTaskListClone) : setAllTaskList(allTaskListClone);
