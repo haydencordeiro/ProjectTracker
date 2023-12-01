@@ -80,7 +80,7 @@ const BoardMainComponent = () => {
   });
 
 
-  const [taskList, setTaskList] = useState(['ToDo', 'InProgress', 'Pending', 'Test', 'Test2','Test4','Test5','Test6'])
+  const [taskList, setTaskList] = useState(['ToDo', 'InProgress', 'Pending'])
 
 
   const AddNewTaskList = (newTaskListName) => {

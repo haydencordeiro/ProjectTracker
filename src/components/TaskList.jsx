@@ -40,7 +40,7 @@ const TaskList = forwardRef(({ tasks, taskListName, handleSort, AddCard }, ref) 
 
 
   return (
-    <div className='flex-1  m-2 h-[81vh]'>
+    <div className='m-2 h-[81vh]'>
     <div className='flex-shrink-0 rounded-lg bg-taskListBg flex-column w-64 max-h-[559px] overflow-auto '>
       <div className='flex justify-between p-2'
             draggable={true}
