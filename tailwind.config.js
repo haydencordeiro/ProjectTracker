@@ -14,7 +14,7 @@ export default {
       'green' : '#00875A',
       'searchFieldBG': '#22272B',
       'whiteText' : '#FCFDFD',
-      'leftSideNavBG': '#232223',
+      'leftSideNavBG': '#252425',
       'leftSideNavText': '#9FADBC',
       'secondaryNavButton': '#182A4B',
       'taskListBg': '#101204',
