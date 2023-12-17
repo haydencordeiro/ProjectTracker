@@ -7,7 +7,7 @@ import { TbBellRinging2 } from "react-icons/tb";
 import { GrFormSearch } from "react-icons/gr";
 import axios from 'axios';
 
-const NavBar = ({user, board, setBoard}) => {
+const NavBar = ({user, board, setBoard, boards, setBoards}) => {
     const Logout = () => {
         fetch("http://localhost:5000/auth/logout", {
           method: "GET",
@@ -29,6 +29,10 @@ const createBoard = async () => {
   const response = await axios.get(`http://localhost:5000/board/api/createBoard/${boardName}`, {
     withCredentials: true,
   });
+  boards.push({
+    name:response.data.board.name,
+    id:response.data.board.id,
+  })
   
   setBoard({
     name: response.data.board.name,
