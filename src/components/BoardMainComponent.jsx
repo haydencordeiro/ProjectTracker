@@ -80,7 +80,6 @@ const BoardMainComponent = ({board, setBoard}) => {
     const [taskList, setTaskList] = useState(['ToDo', 'InProgress', 'Pending'])
 
   useEffect(() => {
-    console.log(board.boardId)
     const fetchTasks = async () => {
       try {
         const response = await axios.get(`http://localhost:5000/board/api/getTasks/${board.boardId}`, {
@@ -88,7 +87,6 @@ const BoardMainComponent = ({board, setBoard}) => {
         });
         setAllTaskList(response.data.board.tasks);
         setTaskList(response.data.board.boardList)
-        console.log(response.data.board)
         // setBoard({
         //   name: response.data.board.name,
         //   boardId: response.data.board.id
@@ -157,7 +155,6 @@ const BoardMainComponent = ({board, setBoard}) => {
     let temp = allTaskListClone[firstObjectIndex];
     if (!isEntireList) {
       // change the list for dragged task
-      console.log(dragRef.current.draggedOverListName);
       temp.list = dragRef.current.draggedOverListName
       moveTaskApiHelper(firstObjectIndex,secondObjectIndex, dragRef.current.draggedOverListName)
     }

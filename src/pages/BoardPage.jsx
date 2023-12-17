@@ -5,7 +5,7 @@ import SecondaryNavbar from '../components/SecondaryNavbar'
 import BoardMainComponent from '../components/BoardMainComponent'
 import { FaChevronRight } from "react-icons/fa";
 
-const BoardPage = ({user, board, setBoard}) => {
+const BoardPage = ({user, board, setBoard, boards, setBoards}) => {
     const [isSideNavOpen, setIsSideNavOpen] = useState(false)
 
     const toggleSideNav = () =>{
@@ -20,7 +20,7 @@ const BoardPage = ({user, board, setBoard}) => {
                 {
                     isSideNavOpen && 
                     <div className={`${isSideNavOpen ? 'w-1/5' : 'w-0' } bg-leftSideNavBG text-leftSideNavText`}>
-                    <LeftSideNavBar toggleSideNav={toggleSideNav} user={user}/>
+                    <LeftSideNavBar toggleSideNav={toggleSideNav} user={user} boards={boards} setBoard={setBoard}/>
                 </div>
                 }
 

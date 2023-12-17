@@ -3,6 +3,9 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import BoardPage from './pages/BoardPage'
 import SignIn from './pages/SignIn'
+import axios from 'axios';
+
+
 function App() {
   const [user, setUser] = useState(null);
   const [board, setBoard] = useState(
@@ -11,9 +14,19 @@ function App() {
       boardId: '553f17a4-82ec-4396-8253-6b8a54c11885',
     }
   )
+  const[boards, setBoards] = useState([])
 
 
-
+  useEffect(()=>{
+    console.log("ASF", user)
+    const fetchBoard = async() => {
+      const response = await axios.get('http://localhost:5000/board/api/getBoards',{
+        withCredentials:true
+      });
+      setBoards(response.data.boards);
+    }
+    fetchBoard()
+  },[user])
 
   useEffect(() => {
     const getUser = () => {
@@ -27,12 +40,12 @@ function App() {
         },
       })
         .then((response) => {
+
           if (response.status === 200) return response.json();
           throw new Error("authentication has been failed!");
         })
         .then((resObject) => {
-          console.log(resObject.user)
-          setUser(resObject.user);
+          setUser(resObject.user)
         })
         .catch((err) => {
           console.log(err);
@@ -40,10 +53,13 @@ function App() {
     };
     getUser();
   }, []);
+
+
+
   return (
     <div className='h-screen w-screen overflow-y-clip overflow-x-auto'>
     { user?
-    <BoardPage user={user} board={board} setBoard={setBoard}></BoardPage>:
+    <BoardPage user={user} board={board} setBoard={setBoard} boards={boards} setBoards={setBoards}></BoardPage>:
     <SignIn></SignIn>}
     </div>
   )

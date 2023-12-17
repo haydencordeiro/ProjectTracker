@@ -26,9 +26,6 @@ const createBoard = async () => {
   if (boardName == null || boardName == "") {
     return
   }
-  // console.log(boardName)
-  // return
-
   const response = await axios.get(`http://localhost:5000/board/api/createBoard/${boardName}`, {
     withCredentials: true,
   });
