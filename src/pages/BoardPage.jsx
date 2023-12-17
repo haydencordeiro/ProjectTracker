@@ -5,7 +5,7 @@ import SecondaryNavbar from '../components/SecondaryNavbar'
 import BoardMainComponent from '../components/BoardMainComponent'
 import { FaChevronRight } from "react-icons/fa";
 
-const BoardPage = () => {
+const BoardPage = ({user}) => {
     const [isSideNavOpen, setIsSideNavOpen] = useState(false)
 
     const toggleSideNav = () =>{
@@ -14,7 +14,7 @@ const BoardPage = () => {
     return (
         <div className='min-h-full min-w-full flex flex-col bg-cyan-800'>
             <div>
-                <NavBar />
+                <NavBar user={user}/>
             </div>
             <div className='flex flex-1'>
                 {

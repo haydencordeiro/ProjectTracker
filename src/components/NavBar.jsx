@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useState, useEffect} from 'react'
 import { FaWindowRestore  } from "react-icons/fa";
 import { FaArrowDown  } from "react-icons/fa";
 import { SlArrowDown } from "react-icons/sl";
@@ -6,7 +6,20 @@ import { IoApps } from "react-icons/io5";
 import { TbBellRinging2 } from "react-icons/tb";
 import { GrFormSearch } from "react-icons/gr";
 
-const NavBar = () => {
+const NavBar = ({user}) => {
+    const Logout = () => {
+        fetch("http://localhost:5000/auth/logout", {
+          method: "GET",
+          credentials: "include",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Credentials": true,
+          },
+        })
+        location.reload()
+      };
+
   return (
     <div className='w-full bg-navbarBackground h-12 flex justify-between items-center p-2'>
         <div >
@@ -29,7 +42,9 @@ const NavBar = () => {
         </div>
                 </li>
                 <li className='text-navbarTextColor justify-center items-center'><TbBellRinging2 className='text-navbarTextColor text-xl mt-1' /></li>
-                <li className='text-navbarTextColor'><div className='text-whiteText bg-green p-1 w-8 h-8 rounded-full font-medium'>HC</div></li>
+                <li className='text-navbarTextColor'><div className='text-whiteText bg-green p-1 w-8 h-8 rounded-full font-medium justify-center text-center items-center' onClick={() => Logout()} >
+                {user.displayName.split(' ')[0][0] + user.displayName.split(' ')[1][0]}
+</div></li>
             </ul>
         </div>
     </div>

@@ -34,7 +34,7 @@ function App() {
   return (
     <div className='h-screen w-screen overflow-y-clip overflow-x-auto'>
     { user?
-    <BoardPage></BoardPage>:
+    <BoardPage user={user}></BoardPage>:
     <SignIn></SignIn>}
     </div>
   )
