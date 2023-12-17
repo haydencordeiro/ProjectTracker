@@ -6,6 +6,12 @@ import axios from 'axios';
 
 
 const BoardMainComponent = () => {
+  const [board, setBoard] = useState(
+    {
+      name: '',
+      boardId: '',
+    }
+  )
   const [allTaskList, setAllTaskList] = useState(
     [
       {
@@ -81,6 +87,10 @@ const BoardMainComponent = () => {
         });
         setAllTaskList(response.data.board.tasks);
         setTaskList(response.data.board.boardList)
+        setBoard({
+          name: response.data.board.name,
+          boardId: '553f17a4-82ec-4396-8253-6b8a54c11885'
+        })
       } catch (error) {
         console.error(error.message);
       }
@@ -100,10 +110,11 @@ const BoardMainComponent = () => {
 
 
 
-  const AddNewTaskList = (newTaskListName) => {
+  const AddNewTaskList = async(newTaskListName) => {
     let temp = [...taskList]
     temp.push(newTaskListName)
     setTaskList(temp)
+    
   }
   function handleSort(isEntireList = false) {
     const allTaskListClone = isEntireList ? [...taskList] : [...allTaskList];
@@ -136,22 +147,25 @@ const BoardMainComponent = () => {
   }
 
 
-  function AddCard(taskData) {
+  async function AddCard(taskData) {
     const temp = [...allTaskList]
     taskData['id'] = "9a2ff95a-98f2-4da0-918d-6f1f43e3b61dd" + taskData.task
     temp.push(
       taskData
     )
+    const response = await axios.get(`http://localhost:5000/board/api/addTask/${board.boardId}/${taskData.task}/${taskData.list}`, {
+      withCredentials: true,
+    });
     setAllTaskList(temp)
 
   }
   return (
     <div className="h-screen bg-green bg-fit bg-center bg-[url('https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2048x1194/1ae72d8a416e9a846331da7083f0d4ba/photo-1694250990115-ca7d9d991b24.jpg')]">
-      <SecondaryNavbar />
+      <SecondaryNavbar board={board}/>
 
       <div className='flex overflow-auto'>
         {taskList.map((task, index) =>
-          <TaskList taskListName={task} tasks={allTaskList} key={index} ref={dragRef} handleSort={handleSort}
+          <TaskList board={board} taskListName={task} tasks={allTaskList} key={index} ref={dragRef} handleSort={handleSort}
             AddCard={AddCard}
           ></TaskList>
         )}

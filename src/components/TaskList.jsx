@@ -4,7 +4,7 @@ import { HiDotsHorizontal } from 'react-icons/hi';
 import { BsClock } from 'react-icons/bs';
 import { MdClose } from "react-icons/md";
 
-const TaskList = forwardRef(({ tasks, taskListName, handleSort, AddCard }, ref) => {
+const TaskList = forwardRef(({board, tasks, taskListName, handleSort, AddCard }, ref) => {
   const [allTaskList, setAllTaskList] = useState([]);
   const [addingNewTask, setAddingNewTask] = useState(false);
   const [inputText, setInputText] = useState('')
