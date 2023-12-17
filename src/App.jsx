@@ -25,6 +25,17 @@ function App() {
         withCredentials:true
       });
       setBoards(response.data.boards);
+      const lastBoard = response.data.boards.at(-1);
+      if(lastBoard){
+        setBoard(
+          {
+            name: lastBoard.name,
+            boardId: lastBoard.id,
+            boardImageURL: lastBoard.boardImageURL
+          }
+        )
+      }
+
     }
     fetchBoard()
   },[user])
