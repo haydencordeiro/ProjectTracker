@@ -114,7 +114,7 @@ const BoardMainComponent = () => {
     let temp = [...taskList]
     temp.push(newTaskListName)
     setTaskList(temp)
-    
+
   }
   function handleSort(isEntireList = false) {
     const allTaskListClone = isEntireList ? [...taskList] : [...allTaskList];
@@ -123,10 +123,14 @@ const BoardMainComponent = () => {
     if (isEntireList) {
       // dragTitleListName -> Todo List Name Picked up
       // draggedOverTitleListName -> ToDo List Name to Swap with
+      // one endpoint that will swap board.boardList based on 2 index
       firstObjectIndex = allTaskListClone.findIndex(obj => obj === dragRef.current.dragTitleListName);
       secondObjectIndex = allTaskListClone.findIndex(obj => obj === dragRef.current.draggedOverTitleListName);
     }
     else {
+        // one endpoint that will swap board.tasks based on 2 index but also need to update the first index list
+        
+
       firstObjectIndex = allTaskListClone.findIndex(obj => obj.id === dragRef.current.dragTask);
       secondObjectIndex = allTaskListClone.findIndex(obj => obj.id === dragRef.current.draggeOverTask);
       console.log(allTaskListClone[firstObjectIndex], firstObjectIndex,secondObjectIndex)
