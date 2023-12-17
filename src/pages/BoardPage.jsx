@@ -20,7 +20,7 @@ const BoardPage = ({user}) => {
                 {
                     isSideNavOpen && 
                     <div className={`${isSideNavOpen ? 'w-1/5' : 'w-0' } bg-leftSideNavBG text-leftSideNavText`}>
-                    <LeftSideNavBar toggleSideNav={toggleSideNav} />
+                    <LeftSideNavBar toggleSideNav={toggleSideNav} user={user}/>
                 </div>
                 }
 
