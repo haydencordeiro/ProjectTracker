@@ -1,7 +1,8 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import TaskList from './TaskList'
 import SecondaryNavbar from './SecondaryNavbar'
 import AddTaskList from './AddTaskList'
+import axios from 'axios';
 
 
 const BoardMainComponent = () => {
@@ -68,8 +69,25 @@ const BoardMainComponent = () => {
         "id": "9a2ff95a-98f2-4da0-918d-6f1f43e3b61d"
       }
     ]
+    
+    )
+    const [taskList, setTaskList] = useState(['ToDo', 'InProgress', 'Pending'])
 
-  )
+  useEffect(() => {
+    const fetchTasks = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/board/api/getTasks/553f17a4-82ec-4396-8253-6b8a54c11885', {
+          withCredentials: true,
+        });
+        setAllTaskList(response.data.board.tasks);
+        setTaskList(response.data.board.boardList)
+      } catch (error) {
+        console.error(error.message);
+      }
+    };
+
+    fetchTasks();
+  }, []); 
 
 
   const dragRef = useRef({
@@ -80,7 +98,6 @@ const BoardMainComponent = () => {
   });
 
 
-  const [taskList, setTaskList] = useState(['ToDo', 'InProgress', 'Pending'])
 
 
   const AddNewTaskList = (newTaskListName) => {
