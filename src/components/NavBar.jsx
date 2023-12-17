@@ -5,8 +5,9 @@ import { SlArrowDown } from "react-icons/sl";
 import { IoApps } from "react-icons/io5";
 import { TbBellRinging2 } from "react-icons/tb";
 import { GrFormSearch } from "react-icons/gr";
+import axios from 'axios';
 
-const NavBar = ({user}) => {
+const NavBar = ({user, board, setBoard}) => {
     const Logout = () => {
         fetch("http://localhost:5000/auth/logout", {
           method: "GET",
@@ -20,6 +21,23 @@ const NavBar = ({user}) => {
         location.reload()
       };
 
+const createBoard = async () => {
+  let boardName = prompt("Enter a name for your board", "");
+  if (boardName == null || boardName == "") {
+    return
+  }
+  // console.log(boardName)
+  // return
+
+  const response = await axios.get(`http://localhost:5000/board/api/createBoard/${boardName}`, {
+    withCredentials: true,
+  });
+  
+  setBoard({
+    name: response.data.board.name,
+    boardId: response.data.board.id,
+  })
+}
   return (
     <div className='w-full bg-navbarBackground h-12 flex justify-between items-center p-2'>
         <div >
@@ -28,7 +46,7 @@ const NavBar = ({user}) => {
                 <li className='flex justify-evenly items-center text-navbarTextColor text-lg font-bold'>  <IoApps className='mr-2 text-navbarTextColor' />  Trello</li>
                 <li className='flex items-center p-2 rounded-sm text-navbarTextColor text-sm font-medium hover:bg-blue-200'>Recent  <SlArrowDown className=' text-xs text-navbarTextColor ml-2' /> </li>
                 <li className='flex items-center p-2 rounded-sm text-navbarTextColor text-sm font-medium hover:bg-blue-200'>Starred <SlArrowDown className=' text-xs text-navbarTextColor ml-2' /> </li>
-                <li className='flex items-center text-navbarBackground rounded-sm px-3 py-1 my-1 bg-menuButtonColor text-sm font-medium'>Create</li>
+                <li className='flex items-center text-navbarBackground rounded-sm px-3 py-1 my-1 bg-menuButtonColor text-sm font-medium' onClick={() => createBoard()}>Create</li>
 
             </ul>
         </div>

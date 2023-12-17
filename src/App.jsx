@@ -5,6 +5,15 @@ import BoardPage from './pages/BoardPage'
 import SignIn from './pages/SignIn'
 function App() {
   const [user, setUser] = useState(null);
+  const [board, setBoard] = useState(
+    {
+      name: '',
+      boardId: '553f17a4-82ec-4396-8253-6b8a54c11885',
+    }
+  )
+
+
+
 
   useEffect(() => {
     const getUser = () => {
@@ -34,7 +43,7 @@ function App() {
   return (
     <div className='h-screen w-screen overflow-y-clip overflow-x-auto'>
     { user?
-    <BoardPage user={user}></BoardPage>:
+    <BoardPage user={user} board={board} setBoard={setBoard}></BoardPage>:
     <SignIn></SignIn>}
     </div>
   )

@@ -5,13 +5,13 @@ import AddTaskList from './AddTaskList'
 import axios from 'axios';
 
 
-const BoardMainComponent = () => {
-  const [board, setBoard] = useState(
-    {
-      name: '',
-      boardId: '',
-    }
-  )
+const BoardMainComponent = ({board, setBoard}) => {
+  // const [board, setBoard] = useState(
+  //   {
+  //     name: '',
+  //     boardId: '',
+  //   }
+  // )
   const [allTaskList, setAllTaskList] = useState(
     [
       {
@@ -80,24 +80,26 @@ const BoardMainComponent = () => {
     const [taskList, setTaskList] = useState(['ToDo', 'InProgress', 'Pending'])
 
   useEffect(() => {
+    console.log(board.boardId)
     const fetchTasks = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/board/api/getTasks/553f17a4-82ec-4396-8253-6b8a54c11885', {
+        const response = await axios.get(`http://localhost:5000/board/api/getTasks/${board.boardId}`, {
           withCredentials: true,
         });
         setAllTaskList(response.data.board.tasks);
         setTaskList(response.data.board.boardList)
-        setBoard({
-          name: response.data.board.name,
-          boardId: '553f17a4-82ec-4396-8253-6b8a54c11885'
-        })
+        console.log(response.data.board)
+        // setBoard({
+        //   name: response.data.board.name,
+        //   boardId: response.data.board.id
+        // })
       } catch (error) {
         console.error(error.message);
       }
     };
 
     fetchTasks();
-  }, []); 
+  }, [board]); 
 
 
   const dragRef = useRef({
@@ -116,6 +118,20 @@ const BoardMainComponent = () => {
     setTaskList(temp)
 
   }
+
+
+  const swapListBackendApiHelper = async(first, second) => {
+    const response = await axios.get(`http://localhost:5000/board/api/swaplist/${board.boardId}/${first}/${second}`, {
+      withCredentials: true,
+    });
+  }
+
+  const moveTaskApiHelper = async(first, second, newList) => {
+    const response = await axios.get(`http://localhost:5000/board/api/movetask/${board.boardId}/${first}/${second}/${newList}`, {
+      withCredentials: true,
+    });
+  }
+
   function handleSort(isEntireList = false) {
     const allTaskListClone = isEntireList ? [...taskList] : [...allTaskList];
     let firstObjectIndex;
@@ -126,6 +142,7 @@ const BoardMainComponent = () => {
       // one endpoint that will swap board.boardList based on 2 index
       firstObjectIndex = allTaskListClone.findIndex(obj => obj === dragRef.current.dragTitleListName);
       secondObjectIndex = allTaskListClone.findIndex(obj => obj === dragRef.current.draggedOverTitleListName);
+      swapListBackendApiHelper(firstObjectIndex, secondObjectIndex)
     }
     else {
         // one endpoint that will swap board.tasks based on 2 index but also need to update the first index list
@@ -142,6 +159,7 @@ const BoardMainComponent = () => {
       // change the list for dragged task
       console.log(dragRef.current.draggedOverListName);
       temp.list = dragRef.current.draggedOverListName
+      moveTaskApiHelper(firstObjectIndex,secondObjectIndex, dragRef.current.draggedOverListName)
     }
     allTaskListClone[firstObjectIndex] = allTaskListClone[secondObjectIndex]
     allTaskListClone[secondObjectIndex] = temp;
