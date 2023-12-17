@@ -33,10 +33,10 @@ const createBoard = async () => {
     name:response.data.board.name,
     id:response.data.board.id,
   })
-  
   setBoard({
     name: response.data.board.name,
     boardId: response.data.board.id,
+    boardImageURL: response.data.board.boardImageURL
   })
 }
   return (

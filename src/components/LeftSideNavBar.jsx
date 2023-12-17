@@ -27,7 +27,8 @@ const LeftSideNavBar = ({ toggleSideNav, user, boards, setBoard }) => {
         onClick={()=>{
           setBoard({
             name: board.name,
-            boardId: board.id
+            boardId: board.id,
+            boardImageURL:board.boardImageURL
           })
         }}
         

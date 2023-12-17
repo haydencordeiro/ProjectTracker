@@ -120,7 +120,7 @@ const TaskList = forwardRef(({board, tasks, taskListName, handleSort, AddCard },
 
       {/* End */}
 
-      {addingNewTask ?
+      {addingNewTask  ?
         <div className='bg-cyan-500 flex items-center hover:bg-red-500 mx-1 rounded-md text-whiteText' >
           <h2 className='text-sm text-navbarBackground font-semibold rounded-sm py-1 px-2 bg-menuButtonColor'
             onClick={() => { AddCard({ 'list': taskListName, 'task': inputText }); setAddingNewTask(false); }}>
