@@ -7,7 +7,7 @@ import { MdClose } from "react-icons/md";
 
 
 
-const AddTaskList = ({AddNewTaskList}) => {
+const AddTaskList = ({board, AddNewTaskList}) => {
   const [addingNewTask, setAddingNewTaskList] = useState(false)
   const [inputText, setInputText] = useState('')
 
@@ -53,7 +53,7 @@ const AddTaskList = ({AddNewTaskList}) => {
 
 
 
-      <div className={`flex flex-row h-10 min-w-64 mt-2 mr-4 rounded-md flex-shrink-0 bg-addNewListBg items-center hover:bg-transparent`}
+      board.name && <div className={`flex flex-row h-10 min-w-64 mt-2 mr-4 rounded-md flex-shrink-0 bg-addNewListBg items-center hover:bg-transparent`}
         onClick={() => { setAddingNewTaskList(true) }} >
         <FaPlus className='rounded-sm mx-2 ml-4 text-addNewListText text-sm' />
         <h2 className='text-sm text-addNewListText p-2'>Add a card</h2>

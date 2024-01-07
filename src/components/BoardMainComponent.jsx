@@ -191,6 +191,7 @@ const BoardMainComponent = ({board, setBoard}) => {
           ></TaskList>
         )}
         <AddTaskList
+        board={board}
           AddNewTaskList={AddNewTaskList}
         ></AddTaskList>
 
