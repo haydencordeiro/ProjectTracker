@@ -32,6 +32,7 @@ const createBoard = async () => {
   boards.push({
     name:response.data.board.name,
     id:response.data.board.id,
+    boardImageURL: response.data.board.boardImageURL
   })
   setBoard({
     name: response.data.board.name,
