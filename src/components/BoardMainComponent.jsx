@@ -181,7 +181,8 @@ const BoardMainComponent = ({board, setBoard}) => {
 
   }
   return (
-    <div className={`h-screen bg-green bg-fit bg-center bg-[url('${board.boardImageURL}')]`}>
+    <div    style={{'--image-url': `url(${board.boardImageURL})`}} 
+    className={'h-screen bg-fit bg-center bg-[image:var(--image-url)]'}>
       <SecondaryNavbar board={board}/>
 
       <div className='flex overflow-auto'>
