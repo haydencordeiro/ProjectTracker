@@ -3,15 +3,16 @@ import TaskList from './TaskList'
 import SecondaryNavbar from './SecondaryNavbar'
 import AddTaskList from './AddTaskList'
 import axios from 'axios';
+import { useDispatch, useSelector } from "react-redux";
+import {
+  updateTasks
+} from "../state/tasksSlice";
 
 
 const BoardMainComponent = ({board, setBoard}) => {
+  const allTaskList = useSelector((state) => state.tasks.value);
+  const dispatch = useDispatch();
 
-  const [allTaskList, setAllTaskList] = useState(
-    []
-
-
-    )
     const [taskList, setTaskList] = useState(
       []
       )
@@ -24,7 +25,7 @@ const BoardMainComponent = ({board, setBoard}) => {
           withCredentials: true,
         });
         console.log(response.data)
-        setAllTaskList(response.data.board.tasks);
+        dispatch(updateTasks(response.data.board.tasks));
         setTaskList(response.data.board.boardList)
       } catch (error) {
         console.error(error.message);
@@ -97,7 +98,7 @@ const BoardMainComponent = ({board, setBoard}) => {
     allTaskListClone[secondObjectIndex] = temp;
 
     // updating the appropriate list
-    isEntireList ? setTaskList(allTaskListClone) : setAllTaskList(allTaskListClone);
+    isEntireList ? setTaskList(allTaskListClone) : dispatch(updateTasks(allTaskListClone));
   }
 
 
@@ -110,7 +111,7 @@ const BoardMainComponent = ({board, setBoard}) => {
     const response = await axios.get(`http://localhost:5000/board/api/addTask/${board.boardId}/${taskData.task}/${taskData.list}`, {
       withCredentials: true,
     });
-    setAllTaskList(temp)
+    dispatch(updateTasks(temp))
 
   }
   return (

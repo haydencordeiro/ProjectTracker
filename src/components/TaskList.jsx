@@ -3,15 +3,25 @@ import { FaPlus } from 'react-icons/fa';
 import { HiDotsHorizontal } from 'react-icons/hi';
 import { BsClock } from 'react-icons/bs';
 import { MdClose } from "react-icons/md";
+import { useDispatch, useSelector } from "react-redux";
+
+import {
+  updateTasks
+} from "../state/tasksSlice";
+
+
+
 
 const TaskList = forwardRef(({board, tasks, taskListName, handleSort, AddCard }, ref) => {
-  const [allTaskList, setAllTaskList] = useState([]);
+  const allTaskList = useSelector((state) => state.tasks.value);
+  const dispatch = useDispatch();
+
   const [addingNewTask, setAddingNewTask] = useState(false);
   const [inputText, setInputText] = useState('')
-
-  useEffect(() => {
-    setAllTaskList(tasks.filter((task) => task.list === taskListName));
-  }, [tasks, taskListName]);
+// TODO
+  // useEffect(() => {
+  //   dispatch(updateTasks(tasks.filter((task) => task.list === taskListName)));
+  // }, [tasks, taskListName]);
 
   function dueDateCalc(dueDate) {
     const [day, month] = dueDate.split(' ');
