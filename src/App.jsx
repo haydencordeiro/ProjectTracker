@@ -5,8 +5,16 @@ import BoardPage from './pages/BoardPage'
 import SignIn from './pages/SignIn'
 import axios from 'axios';
 
+import { useDispatch, useSelector } from "react-redux";
+import {
+  updateBoards
+} from "./state/boardsSlice";
+
 
 function App() {
+  const boardsn = useSelector((state) => state.boards.value);
+  const dispatch = useDispatch();
+
   const [user, setUser] = useState(null);
   const [board, setBoard] = useState(
     {
@@ -25,6 +33,7 @@ function App() {
         withCredentials:true
       });
       setBoards(response.data.boards);
+      dispatch(updateBoards(response.data.boards))
       const lastBoard = response.data.boards.at(-1);
       if(lastBoard){
         setBoard(
