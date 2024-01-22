@@ -1,10 +1,13 @@
 import React from 'react'
 import { FaChevronLeft } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
+
 import {
   updateBoard
 } from "../state/boardSlice";
-const LeftSideNavBar = ({ toggleSideNav, user}) => {
+const LeftSideNavBar = ({ toggleSideNav}) => {
+  
+  const user = useSelector((state) => state.user.value);
   const boards = useSelector((state) => state.boards.value);
   const dispatch = useDispatch();
 

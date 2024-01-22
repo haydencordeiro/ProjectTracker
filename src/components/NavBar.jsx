@@ -13,9 +13,9 @@ import {
 } from "../state/boardSlice";
 
 
-const NavBar = ({user}) => {
+const NavBar = () => {
   const dispatch = useDispatch();
-
+  const user = useSelector((state)=>state.user.value)
     const Logout = () => {
         fetch("http://localhost:5000/auth/logout", {
           method: "GET",

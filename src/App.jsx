@@ -15,20 +15,16 @@ import {
 } from "./state/boardSlice";
 
 
+
+import {
+  updateUser
+} from "./state/userSlice";
+
+
 function App() {
   const dispatch = useDispatch();
-
-  const [user, setUser] = useState(null);
-  // const [board, setBoard] = useState(
-  //   {
-  //     name: '',
-  //     boardId: '',
-  //     boardImageURL: ''
-  //   }
-  // )
-
+  const user = useSelector((state) => state.user.value);
   useEffect(()=>{
-    console.log("ASF", user)
     const fetchBoard = async() => {
       const response = await axios.get('http://localhost:5000/board/api/getBoards',{
         withCredentials:true
@@ -66,7 +62,7 @@ function App() {
           throw new Error("authentication has been failed!");
         })
         .then((resObject) => {
-          setUser(resObject.user)
+          dispatch(updateUser(resObject.user))
         })
         .catch((err) => {
           console.log(err);
@@ -80,7 +76,7 @@ function App() {
   return (
     <div className='h-screen w-screen overflow-y-clip overflow-x-auto'>
     { user?
-    <BoardPage user={user}></BoardPage>:
+    <BoardPage></BoardPage>:
     <SignIn></SignIn>}
     </div>
   )
