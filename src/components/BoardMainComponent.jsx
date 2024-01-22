@@ -6,80 +6,13 @@ import axios from 'axios';
 
 
 const BoardMainComponent = ({board, setBoard}) => {
-  // const [board, setBoard] = useState(
-  //   {
-  //     name: '',
-  //     boardId: '',
-  //   }
-  // )
+
   const [allTaskList, setAllTaskList] = useState(
     []
-    // [
-    //   {
-    //     "task": "Complete Project Proposal",
-    //     "dueDate": "25 Nov",
-    //     "list": "ToDo",
-    //     "id": "aa0a27c7-24e1-4a42-8bd5-3fda242378ea"
-    //   },
-    //   {
-    //     "task": "Grocery Shopping",
-    //     "dueDate": "26 Nov",
-    //     "list": "ToDo",
-    //     "id": "2d9ec1bf-becf-4f52-b6a6-8a961d8b4b84"
-    //   },
-    //   {
-    //     "task": "Send Birthday Gift",
-    //     "dueDate": "30 Nov",
-    //     "list": "ToDo",
-    //     "id": "8a78b4c1-6c90-44a5-9b4d-dae5ec72b54a"
-    //   },
-    //   {
-    //     "task": "Review Meeting Notes",
-    //     "dueDate": "28 Nov",
-    //     "list": "InProgress",
-    //     "id": "0f81c84e-8b3d-499f-9c9b-894f7f5095a8"
-    //   },
-    //   {
-    //     "task": "Submit Expense Report",
-    //     "dueDate": "02 Dec",
-    //     "list": "InProgress",
-    //     "id": "f2c4e929-d9b0-4c88-9379-615607c6d1c8"
-    //   },
-    //   {
-    //     "task": "Read Chapter 5",
-    //     "dueDate": "01 Dec",
-    //     "list": "Completed",
-    //     "id": "501bf538-15d2-4db2-a4d5-d08d392c5a48"
-    //   },
-    //   {
-    //     "task": "Call Mom",
-    //     "dueDate": "29 Nov",
-    //     "list": "Completed",
-    //     "id": "0a86188a-3d3d-43b1-bc0c-56516a686a74"
-    //   },
-    //   {
-    //     "task": "Plan Weekend Trip",
-    //     "dueDate": "27 Nov",
-    //     "list": "Pending",
-    //     "id": "f41c0c2a-858e-4274-b1b8-4322e01e63c4"
-    //   },
-    //   {
-    //     "task": "Exercise Routine",
-    //     "dueDate": "22 Nov",
-    //     "list": "Pending",
-    //     "id": "aeb2a394-b13a-4e6c-8e54-68e98296d4ef"
-    //   },
-    //   {
-    //     "task": "Learn New Recipe",
-    //     "dueDate": "03 Dec",
-    //     "list": "ToDo",
-    //     "id": "9a2ff95a-98f2-4da0-918d-6f1f43e3b61d"
-    //   }
-    // ]
-    
+
+
     )
     const [taskList, setTaskList] = useState(
-      // ['ToDo', 'InProgress', 'Pending']
       []
       )
 
