@@ -12,7 +12,6 @@ import {
 
 
 function App() {
-  const boardsn = useSelector((state) => state.boards.value);
   const dispatch = useDispatch();
 
   const [user, setUser] = useState(null);
@@ -23,8 +22,6 @@ function App() {
       boardImageURL: ''
     }
   )
-  const[boards, setBoards] = useState([])
-
 
   useEffect(()=>{
     console.log("ASF", user)
@@ -32,7 +29,6 @@ function App() {
       const response = await axios.get('http://localhost:5000/board/api/getBoards',{
         withCredentials:true
       });
-      setBoards(response.data.boards);
       dispatch(updateBoards(response.data.boards))
       const lastBoard = response.data.boards.at(-1);
       if(lastBoard){
@@ -80,7 +76,7 @@ function App() {
   return (
     <div className='h-screen w-screen overflow-y-clip overflow-x-auto'>
     { user?
-    <BoardPage user={user} board={board} setBoard={setBoard} boards={boards} setBoards={setBoards}></BoardPage>:
+    <BoardPage user={user} board={board} setBoard={setBoard}></BoardPage>:
     <SignIn></SignIn>}
     </div>
   )

@@ -7,7 +7,7 @@ import { TbBellRinging2 } from "react-icons/tb";
 import { GrFormSearch } from "react-icons/gr";
 import axios from 'axios';
 
-const NavBar = ({user, board, setBoard, boards, setBoards}) => {
+const NavBar = ({user, board, setBoard}) => {
     const Logout = () => {
         fetch("http://localhost:5000/auth/logout", {
           method: "GET",

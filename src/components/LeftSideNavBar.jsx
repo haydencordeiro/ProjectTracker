@@ -1,7 +1,10 @@
 import React from 'react'
 import { FaChevronLeft } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
 
-const LeftSideNavBar = ({ toggleSideNav, user, boards, setBoard }) => {
+const LeftSideNavBar = ({ toggleSideNav, user, setBoard }) => {
+  const boards = useSelector((state) => state.boards.value);
+
   return (
     <div>
       <div className=' h-14 border border-l-0 border-[hsla(211,18%,68%,0.16)] flex justify-start items-center'>
