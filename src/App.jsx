@@ -10,18 +10,22 @@ import {
   updateBoards
 } from "./state/boardsSlice";
 
+import {
+  updateBoard
+} from "./state/boardSlice";
+
 
 function App() {
   const dispatch = useDispatch();
 
   const [user, setUser] = useState(null);
-  const [board, setBoard] = useState(
-    {
-      name: '',
-      boardId: '',
-      boardImageURL: ''
-    }
-  )
+  // const [board, setBoard] = useState(
+  //   {
+  //     name: '',
+  //     boardId: '',
+  //     boardImageURL: ''
+  //   }
+  // )
 
   useEffect(()=>{
     console.log("ASF", user)
@@ -32,13 +36,13 @@ function App() {
       dispatch(updateBoards(response.data.boards))
       const lastBoard = response.data.boards.at(-1);
       if(lastBoard){
-        setBoard(
+        dispatch(updateBoard(
           {
             name: lastBoard.name,
             boardId: lastBoard.id,
             boardImageURL: lastBoard.boardImageURL
           }
-        )
+        ))
       }
 
     }
@@ -76,7 +80,7 @@ function App() {
   return (
     <div className='h-screen w-screen overflow-y-clip overflow-x-auto'>
     { user?
-    <BoardPage user={user} board={board} setBoard={setBoard}></BoardPage>:
+    <BoardPage user={user}></BoardPage>:
     <SignIn></SignIn>}
     </div>
   )

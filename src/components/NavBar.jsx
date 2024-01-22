@@ -6,8 +6,16 @@ import { IoApps } from "react-icons/io5";
 import { TbBellRinging2 } from "react-icons/tb";
 import { GrFormSearch } from "react-icons/gr";
 import axios from 'axios';
+import { useDispatch, useSelector } from "react-redux";
 
-const NavBar = ({user, board, setBoard}) => {
+import {
+  updateBoard
+} from "../state/boardSlice";
+
+
+const NavBar = ({user}) => {
+  const dispatch = useDispatch();
+
     const Logout = () => {
         fetch("http://localhost:5000/auth/logout", {
           method: "GET",
@@ -34,11 +42,11 @@ const createBoard = async () => {
     id:response.data.board.id,
     boardImageURL: response.data.board.boardImageURL
   })
-  setBoard({
+  dispatch(updateBoard({
     name: response.data.board.name,
     boardId: response.data.board.id,
     boardImageURL: response.data.board.boardImageURL
-  })
+  }))
 }
   return (
     <div className='w-full bg-navbarBackground h-12 flex justify-between items-center p-2'>

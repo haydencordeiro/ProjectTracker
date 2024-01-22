@@ -9,8 +9,9 @@ import {
 } from "../state/tasksSlice";
 
 
-const BoardMainComponent = ({board, setBoard}) => {
+const BoardMainComponent = ({}) => {
   const allTaskList = useSelector((state) => state.tasks.value);
+  const board = useSelector((state) => state.board.value);
   const dispatch = useDispatch();
 
     const [taskList, setTaskList] = useState(

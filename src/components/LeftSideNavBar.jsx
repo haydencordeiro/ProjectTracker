@@ -1,9 +1,12 @@
 import React from 'react'
 import { FaChevronLeft } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-
-const LeftSideNavBar = ({ toggleSideNav, user, setBoard }) => {
+import {
+  updateBoard
+} from "../state/boardSlice";
+const LeftSideNavBar = ({ toggleSideNav, user}) => {
   const boards = useSelector((state) => state.boards.value);
+  const dispatch = useDispatch();
 
   return (
     <div>
@@ -28,11 +31,11 @@ const LeftSideNavBar = ({ toggleSideNav, user, setBoard }) => {
         <div className='flex p-3 h-8 items-center hover:bg-[#A1BDD914]'
         key = {board.id}
         onClick={()=>{
-          setBoard({
+          dispatch(updateBoard({
             name: board.name,
             boardId: board.id,
             boardImageURL:board.boardImageURL
-          })
+          }))
         }}
         
         >
