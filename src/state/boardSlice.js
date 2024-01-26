@@ -1,14 +1,11 @@
-import {  createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
-
-
-const initialState= {
-  value: 
-      {
-      name: '',
-      boardId: '',
-      boardImageURL: ''
-    },
+const initialState = {
+  value: {
+    name: "",
+    boardId: "",
+    boardImageURL: "",
+  },
 };
 
 const boardSlice = createSlice({
@@ -19,10 +16,7 @@ const boardSlice = createSlice({
       state.value = action.payload;
     },
   },
-
 });
-
-
 
 export const { updateBoard } = boardSlice.actions;
 

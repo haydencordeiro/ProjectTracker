@@ -1,8 +1,6 @@
-import {  createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
-
-
-const initialState= {
+const initialState = {
   value: [],
 };
 
@@ -15,12 +13,9 @@ const boardsSlice = createSlice({
     },
     addBoard: (state, action) => {
       state.value.push(action.payload);
-    }
+    },
   },
-
 });
-
-
 
 export const { updateBoards, addBoard } = boardsSlice.actions;
 
