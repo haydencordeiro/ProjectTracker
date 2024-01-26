@@ -90,7 +90,7 @@ const BoardMainComponent = ({}) => {
     }
 
     // swapping logic
-    let temp = allTaskListClone[firstObjectIndex];
+    let temp = {...allTaskListClone[firstObjectIndex]};
     if (!isEntireList) {
       // change the list for dragged task
       temp.list = dragRef.current.draggedOverListName;
