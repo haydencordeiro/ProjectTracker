@@ -1,8 +1,10 @@
 import React from 'react'
 import { FaStar } from "react-icons/fa";
 import { RiUserSharedLine } from "react-icons/ri";
+import { useDispatch, useSelector } from "react-redux";
 
-const SecondaryNavbar = ({board}) => {
+const SecondaryNavbar = () => {
+  const board = useSelector((state) => state.board.value);
   return (
     <div className='bg-secondaryNavColor h-14 flex justify-between items-center'>
       <div>

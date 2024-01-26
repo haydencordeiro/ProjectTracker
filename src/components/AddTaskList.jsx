@@ -3,11 +3,13 @@ import { FaPlus } from 'react-icons/fa';
 import { HiDotsHorizontal } from 'react-icons/hi';
 import { BsClock } from 'react-icons/bs';
 import { MdClose } from "react-icons/md";
+import { useDispatch, useSelector } from "react-redux";
 
 
 
 
-const AddTaskList = ({board, AddNewTaskList}) => {
+const AddTaskList = ({AddNewTaskList}) => {
+  const board = useSelector((state) => state.board.value);
   const [addingNewTask, setAddingNewTaskList] = useState(false)
   const [inputText, setInputText] = useState('')
 

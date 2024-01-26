@@ -115,16 +115,15 @@ const BoardMainComponent = ({}) => {
   return (
     <div    style={{'--image-url': `url(${board.boardImageURL})`}} 
     className={'h-screen bg-fit bg-center bg-[image:var(--image-url)]'}>
-      <SecondaryNavbar board={board}/>
+      <SecondaryNavbar/>
 
       <div className='flex overflow-auto'>
         {taskList.map((task, index) =>
-          <TaskList board={board} taskListName={task} key={index} ref={dragRef} handleSort={handleSort}
+          <TaskList taskListName={task} key={index} ref={dragRef} handleSort={handleSort}
             AddCard={AddCard}
           ></TaskList>
         )}
         <AddTaskList
-        board={board}
           AddNewTaskList={AddNewTaskList}
         ></AddTaskList>
 

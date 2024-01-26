@@ -5,16 +5,9 @@ import { BsClock } from 'react-icons/bs';
 import { MdClose } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 
-import {
-  updateTasks
-} from "../state/tasksSlice";
-
-
-
 
 const TaskList = forwardRef(({ taskListName, handleSort, AddCard }, ref) => {
   const tasks = useSelector((state) => state.tasks.value).filter((task) => task.list === taskListName);
-  const dispatch = useDispatch();
 
   const [addingNewTask, setAddingNewTask] = useState(false);
   const [inputText, setInputText] = useState('')
