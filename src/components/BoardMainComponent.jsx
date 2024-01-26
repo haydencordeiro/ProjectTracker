@@ -19,13 +19,11 @@ const BoardMainComponent = ({}) => {
       )
 
   useEffect(() => {
-    console.log("board chagned",board)
     const fetchTasks = async () => {
       try {
         const response = await axios.get(`http://localhost:5000/board/api/getTasks/${board.boardId}`, {
           withCredentials: true,
         });
-        console.log(response.data)
         dispatch(updateTasks(response.data.board.tasks));
         setTaskList(response.data.board.boardList)
       } catch (error) {
@@ -85,7 +83,6 @@ const BoardMainComponent = ({}) => {
 
       firstObjectIndex = allTaskListClone.findIndex(obj => obj.id === dragRef.current.dragTask);
       secondObjectIndex = allTaskListClone.findIndex(obj => obj.id === dragRef.current.draggeOverTask);
-      console.log(allTaskListClone[firstObjectIndex], firstObjectIndex,secondObjectIndex)
     }
 
     // swapping logic
