@@ -12,8 +12,14 @@ import {
   updateBoard
 } from "../state/boardSlice";
 
+import {
+  addBoard
+} from "../state/boardsSlice";
+
+
 
 const NavBar = () => {
+  const boards = useSelector((state) => state.boards.value);
   const dispatch = useDispatch();
   const user = useSelector((state)=>state.user.value)
     const Logout = () => {
@@ -37,11 +43,11 @@ const createBoard = async () => {
   const response = await axios.get(`http://localhost:5000/board/api/createBoard/${boardName}`, {
     withCredentials: true,
   });
-  boards.push({
+  dispatch(addBoard({
     name:response.data.board.name,
     id:response.data.board.id,
     boardImageURL: response.data.board.boardImageURL
-  })
+  }))
   dispatch(updateBoard({
     name: response.data.board.name,
     boardId: response.data.board.id,

@@ -122,7 +122,7 @@ const BoardMainComponent = ({}) => {
 
       <div className='flex overflow-auto'>
         {taskList.map((task, index) =>
-          <TaskList board={board} taskListName={task} tasks={allTaskList} key={index} ref={dragRef} handleSort={handleSort}
+          <TaskList board={board} taskListName={task} key={index} ref={dragRef} handleSort={handleSort}
             AddCard={AddCard}
           ></TaskList>
         )}

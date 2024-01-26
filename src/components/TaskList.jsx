@@ -12,15 +12,15 @@ import {
 
 
 
-const TaskList = forwardRef(({board, tasks, taskListName, handleSort, AddCard }, ref) => {
-  const allTaskList = useSelector((state) => state.tasks.value);
+const TaskList = forwardRef(({ taskListName, handleSort, AddCard }, ref) => {
+  const tasks = useSelector((state) => state.tasks.value).filter((task) => task.list === taskListName);
   const dispatch = useDispatch();
 
   const [addingNewTask, setAddingNewTask] = useState(false);
   const [inputText, setInputText] = useState('')
 // TODO
   // useEffect(() => {
-  //   dispatch(updateTasks(tasks.filter((task) => task.list === taskListName)));
+  //   tasks.filter((task) => task.list === taskListName);
   // }, [tasks, taskListName]);
 
   function dueDateCalc(dueDate) {
@@ -72,7 +72,7 @@ const TaskList = forwardRef(({board, tasks, taskListName, handleSort, AddCard },
           <HiDotsHorizontal className='text-whiteText' />
         </div>
       </div>
-      {allTaskList.map((task, index) => (
+      {tasks.map((task, index) => (
         <div
         
           className='flex flex-col bg-taskCardBg rounded-lg m-1 p-2'
