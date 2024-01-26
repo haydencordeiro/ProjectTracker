@@ -1,44 +1,42 @@
-import { useState, useEffect } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import BoardPage from './pages/BoardPage'
-import SignIn from './pages/SignIn'
-import axios from 'axios';
+import { useState, useEffect } from "react";
+import reactLogo from "./assets/react.svg";
+import viteLogo from "/vite.svg";
+import BoardPage from "./pages/BoardPage";
+import SignIn from "./pages/SignIn";
+import axios from "axios";
 
+import { useDispatch, useSelector } from "react-redux";
+import { updateBoards } from "./state/boardsSlice";
+
+import { updateBoard } from "./state/boardSlice";
+
+import { updateUser } from "./state/userSlice";
 
 function App() {
-  const [user, setUser] = useState(null);
-  const [board, setBoard] = useState(
-    {
-      name: '',
-      boardId: '',
-      boardImageURL: ''
-    }
-  )
-  const[boards, setBoards] = useState([])
-
-
-  useEffect(()=>{
-    console.log("ASF", user)
-    const fetchBoard = async() => {
-      const response = await axios.get('http://localhost:5000/board/api/getBoards',{
-        withCredentials:true
-      });
-      setBoards(response.data.boards);
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user.value);
+  useEffect(() => {
+    const fetchBoard = async () => {
+      const response = await axios.get(
+        "http://localhost:5000/board/api/getBoards",
+        {
+          withCredentials: true,
+        }
+      );
+      dispatch(updateBoards(response.data.boards));
       const lastBoard = response.data.boards.at(-1);
-      if(lastBoard){
-        setBoard(
-          {
+      if (lastBoard) {
+        dispatch(
+          updateBoard({
             name: lastBoard.name,
             boardId: lastBoard.id,
-            boardImageURL: lastBoard.boardImageURL
-          }
-        )
+            boardImageURL: lastBoard.boardImageURL,
+          })
+        );
       }
-
-    }
-    fetchBoard()
-  },[user])
+    };
+    fetchBoard();
+  }, [user]);
 
   useEffect(() => {
     const getUser = () => {
@@ -52,12 +50,11 @@ function App() {
         },
       })
         .then((response) => {
-
           if (response.status === 200) return response.json();
           throw new Error("authentication has been failed!");
         })
         .then((resObject) => {
-          setUser(resObject.user)
+          dispatch(updateUser(resObject.user));
         })
         .catch((err) => {
           console.log(err);
@@ -66,15 +63,11 @@ function App() {
     getUser();
   }, []);
 
-
-
   return (
-    <div className='h-screen w-screen overflow-y-clip overflow-x-auto'>
-    { user?
-    <BoardPage user={user} board={board} setBoard={setBoard} boards={boards} setBoards={setBoards}></BoardPage>:
-    <SignIn></SignIn>}
+    <div className="h-screen w-screen overflow-y-clip overflow-x-auto">
+      {user ? <BoardPage></BoardPage> : <SignIn></SignIn>}
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
