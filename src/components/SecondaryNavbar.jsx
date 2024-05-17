@@ -1,23 +1,26 @@
-import React from 'react'
+import React from "react";
 import { FaStar } from "react-icons/fa";
 import { RiUserSharedLine } from "react-icons/ri";
+import { useDispatch, useSelector } from "react-redux";
 
-const SecondaryNavbar = ({board}) => {
+const SecondaryNavbar = () => {
+  const board = useSelector((state) => state.board.value);
   return (
-    <div className='bg-secondaryNavColor h-14 flex justify-between items-center'>
+    <div className="bg-secondaryNavColor h-14 flex justify-between items-center">
       <div>
-
-      <ul className='flex gap-2 justify-center items-center '>
-        <li className='font-bold text-xl ml-8'>{board.name}</li>
-        <li className='flex items-center'><FaStar style={{color: 'black'}}  className='mr-2' /> </li>
-      </ul>
+        <ul className="flex gap-2 justify-center items-center ">
+          <li className="font-bold text-xl ml-8">{board.name}</li>
+          <li className="flex items-center">
+            <FaStar style={{ color: "black" }} className="mr-2" />{" "}
+          </li>
+        </ul>
       </div>
-      <div className='flex justify-center items-center bg-secondaryNavButton mr-2 rounded-sm text-whiteText p-2'>
+      <div className="flex justify-center items-center bg-secondaryNavButton mr-2 rounded-sm text-whiteText p-2">
         <RiUserSharedLine />
-      Share
+        Share
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default SecondaryNavbar
+export default SecondaryNavbar;
